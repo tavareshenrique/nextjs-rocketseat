@@ -1,3 +1,4 @@
+import { Footer } from "../footer";
 import { Header } from '../header';
 
 type LayoutProps = {
@@ -9,7 +10,9 @@ export const Layout = ({ children }: LayoutProps) => {
     <div className="relative flex min-h-screen flex-col dark">
       <Header />
       
-      <main className="flex-1 flex flex-col mb-12 h-screen">{children}</main>
+      <main className="flex-1 flex flex-col mb-12">{children}</main>
+
+       <Footer />
     </div>
   );
 };
