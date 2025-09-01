@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import { Search } from '@/components/search';
+import { Search } from "@/components/search";
 import { PostCard } from "@/components/post-card";
 
 export function BlogList() {
@@ -8,7 +8,7 @@ export function BlogList() {
   const query = router.query.q as string;
   const pageTitle = query
     ? `Resultados de busca para "${query}"`
-    : 'Dicas e estratégias para impulsionar seu negócio';
+    : "Dicas e estratégias para impulsionar seu negócio";
 
   return (
     <div className="flex flex-col py-24 flex-grow h-full">
@@ -31,7 +31,17 @@ export function BlogList() {
       </header>
 
       {/* Listagem de posts */}
-       <PostCard />
+      <PostCard
+        title="Transformando seu negócio em uma loja virtual"
+        description="Se você está buscando uma maneira simples e eficaz de vender seus produtos online..."
+        date="20/12/2024"
+        slug="transformando"
+        image="/assets/primeiro-post.png"
+        author={{
+          avatar: "/customer-01.png",
+          name: "Aspen Dokidis",
+        }}
+      />
     </div>
   );
 }
