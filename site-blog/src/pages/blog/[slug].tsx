@@ -48,8 +48,8 @@ export default function PostPage() {
           <article className="bg-gray-600 rounded-lg overflow-hidden border-gray-400 border-[1px]">
             <figure className="relative aspect-[16/10] w-full overflow-hidden rounded-lg">
               <Image
-                src={post?.image ?? ""}
-                alt={post?.title ?? ""}
+                src={post?.image ?? ''}
+                alt={post?.title ?? ''}
                 fill
                 className="object-cover"
               />
@@ -61,11 +61,15 @@ export default function PostPage() {
               </h1>
 
               <Avatar.Container>
-                <Avatar.Image src={post?.author.avatar} alt={post?.title} />
+                <Avatar.Image
+                  src={post?.author.avatar}
+                  alt={post?.title}
+                  size="sm"
+                />
                 <Avatar.Content>
                   <Avatar.Title>{post?.author.name}</Avatar.Title>
                   <Avatar.Description>
-                    Publicado em {""}
+                    Publicado em {''}
                     <time dateTime={post.date}>{publishedDate}</time>
                   </Avatar.Description>
                 </Avatar.Content>
@@ -77,7 +81,7 @@ export default function PostPage() {
             </div>
           </article>
         </div>
-      </div>{" "}
+      </div>{' '}
     </main>
   );
 }
