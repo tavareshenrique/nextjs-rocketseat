@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { PostGridCard } from "../components/post-grid-card";
 import { PostCard } from "../components/post-card";
 
-
 export type BlogListProps = {
   posts: Post[];
 };
@@ -22,8 +21,7 @@ export function BlogList({ posts }: BlogListProps) {
         post.title.toLocaleLowerCase()?.includes(query.toLocaleLowerCase())
       )
     : posts;
-
-  const hasPosts = posts?.length > 0;
+  const hasPosts = postList?.length > 0;
 
   return (
     <div className="flex flex-col py-24 flex-grow h-full">
