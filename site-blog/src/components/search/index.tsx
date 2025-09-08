@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from '@/lib/utils';
@@ -8,7 +8,12 @@ export const Search = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const query = searchParams?.get('q') ?? '';
+  const hasQuery = !!searchParams?.has('q');
+
+
 
   const handleSearch = useCallback(
     (event: React.FormEvent) => {
@@ -31,6 +36,12 @@ export const Search = () => {
     router.push('/blog', { scroll: false });
   };
 
+   useEffect(() => {
+    if (hasQuery) {
+      inputRef.current?.focus();
+    }
+  }, [hasQuery]);
+
   return (
     <form onSubmit={handleSearch} className="relative group w-full md:w-60">
       <SearchIcon
@@ -41,6 +52,7 @@ export const Search = () => {
       />
 
       <input
+        ref={inputRef}
         type="text"
         value={query}
         placeholder="Buscar"
