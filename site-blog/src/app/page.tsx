@@ -2,6 +2,7 @@ import { LandingPage } from "@/templates/landing-page";
 
 import type { Metadata } from 'next';
 
+// opengraph.xyz
 export const metadata: Metadata = {
   title: 'Site.Set',
   description: 'Venda seus produtos como afiliado em um único lugar',
