@@ -1,8 +1,6 @@
-import { Cloudy, Moon, Sun } from 'lucide-react';
-
-import { AppointmentCard } from "../appointment-card";
-
 import { AppointmentPeriod } from '@/types/appointment';
+import { Cloudy, Moon, Sun } from 'lucide-react';
+import { AppointmentCard } from "../appointment-card";
 
 type PeriodSectionProps = {
   period: AppointmentPeriod;
@@ -38,7 +36,11 @@ export const PeriodSection = ({ period }: PeriodSectionProps) => {
             </div>
 
             {period.appointments.map((appointment, index) => (
-              <AppointmentCard key={index} appointment={appointment} />
+              <AppointmentCard
+                key={index}
+                appointment={appointment}
+                isFirstInSection={index === 0}
+              />
             ))}
           </div>
         </div>
