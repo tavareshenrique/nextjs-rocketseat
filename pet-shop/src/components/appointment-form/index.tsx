@@ -22,12 +22,26 @@ import { Input } from '@/components/ui/input';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CalendarIcon, ChevronDownIcon, Dog, Phone, User } from 'lucide-react';
+import {
+  CalendarIcon,
+  ChevronDownIcon,
+  Clock,
+  Dog,
+  Phone,
+  User,
+} from 'lucide-react';
 import { IMaskInput } from 'react-imask';
 import { format, setHours, setMinutes, startOfToday } from 'date-fns';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '../ui/calendar';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 
 const appointmentFormSchema = z
   .object({
@@ -242,18 +256,28 @@ export const AppointmentForm = () => {
 
             <FormField
               control={form.control}
-              name="description"
+              name="time"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-label-medium-size text-content-primary">
-                    Descrição do serviço
+                    Hora
                   </FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Descrição do serviço"
-                      className="resize-none"
-                      {...field}
-                    />
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <div className="flex items-center gap-2">
+                          <Clock className="h-4 w-4 text-content-brand" />
+                          <SelectValue placeholder="--:--" />
+                        </div>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TIME_OPTIONS.map((time) => (
+                          <SelectItem key={time} value={time}>
+                            {time}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -274,9 +298,7 @@ const generateTimeOptions = (): string[] => {
   for (let hour = 9; hour <= 21; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
       if (hour === 21 && minute > 0) break;
-
       const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-
       times.push(timeString);
     }
   }
