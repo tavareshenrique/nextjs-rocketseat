@@ -33,8 +33,11 @@ import {
 } from 'lucide-react';
 import { IMaskInput } from 'react-imask';
 import { format, setHours, setMinutes, startOfToday } from 'date-fns';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { toast } from 'sonner';
+
 import { cn } from '@/lib/utils';
+
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
 import {
   Select,
@@ -90,6 +93,15 @@ export const AppointmentForm = () => {
   });
 
   const onSubmit = (data: AppointFormValues) => {
+    const [hour, minute] = data.time.split(':');
+
+    const scheduleAt = new Date(data.scheduleAt);
+    scheduleAt.setHours(Number(hour), Number(minute), 0, 0);
+
+    toast.success(`Agendamento criado com sucesso!`);
+
+    // invoca nossa SERVER ACTION
+
     console.log(data);
   };
 
