@@ -1,6 +1,6 @@
 import { AppointmentForm } from "@/components/appointment-form";
 import { PeriodSection } from '@/components/period-section';
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma';
 import { groupAppointmentByPeriod } from '@/utils';
 
 export default async function Home() {
@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <div className="bg-background-primary p-6">
-      <div className="flex items-center justify-between md:m-8">
+      <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-title-size text-content-primary mb-2">
             Sua Agenda

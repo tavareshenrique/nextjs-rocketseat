@@ -32,7 +32,7 @@ export const PeriodSection = ({ period }: PeriodSectionProps) => {
           <div>
             {period.appointments.map((appointment, index) => (
               <AppointmentCard
-                key={index}
+                key={appointment.id}
                 appointment={appointment}
                 isFirstInSection={index === 0}
               />
@@ -40,7 +40,9 @@ export const PeriodSection = ({ period }: PeriodSectionProps) => {
           </div>
         </div>
       ) : (
-        <p>Nenhum agendamento para este período</p>
+        <p className="text-paragraph-small-size text-content-secondary p-5">
+          Nenhum agendamento para este período
+        </p>
       )}
     </section>
   );

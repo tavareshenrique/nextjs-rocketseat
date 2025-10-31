@@ -33,11 +33,8 @@ import {
 } from 'lucide-react';
 import { IMaskInput } from 'react-imask';
 import { format, setHours, setMinutes, startOfToday } from 'date-fns';
-import { toast } from 'sonner';
-
-import { cn } from '@/lib/utils';
-
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { cn } from '@/lib/utils';
 import { Calendar } from '../ui/calendar';
 import {
   Select,
@@ -46,7 +43,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { createAppointment } from "@/app/actions";
+import { toast } from 'sonner';
+import { createAppointment } from '@/app/actions';
+import { useState } from 'react';
 
 const appointmentFormSchema = z
   .object({
@@ -81,6 +80,8 @@ const appointmentFormSchema = z
 type AppointFormValues = z.infer<typeof appointmentFormSchema>;
 
 export const AppointmentForm = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const form = useForm<AppointFormValues>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
@@ -99,18 +100,24 @@ export const AppointmentForm = () => {
     const scheduleAt = new Date(data.scheduleAt);
     scheduleAt.setHours(Number(hour), Number(minute), 0, 0);
 
-    toast.success(`Agendamento criado com sucesso!`);
-
-    await createAppointment({
+    const result = await createAppointment({
       ...data,
       scheduleAt,
-    })
+    });
 
-    console.log(data);
+    if (result?.error) {
+      toast.error(result.error);
+      return;
+    }
+
+    toast.success(`Agendamento criado com sucesso!`);
+
+    setIsOpen(false);
+    form.reset();
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="brand">Novo Agendamento</Button>
       </DialogTrigger>
