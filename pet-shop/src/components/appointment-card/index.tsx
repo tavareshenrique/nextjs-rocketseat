@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { Appointment } from '@/types/appointment';
 import { Button } from '../ui/button';
