@@ -22,7 +22,9 @@ export const DatePicker = () => {
   const dateParam = searchParams.get('date');
 
   const getInitialDate = useCallback(() => {
-    if (!dateParam) return;
+    if (!dateParam) {
+      return new Date();
+    }
 
     const [year, month, day] = dateParam.split('-').map(Number);
     const parsedDate = new Date(year, month - 1, day);
